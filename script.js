@@ -15,10 +15,8 @@ function getHumanChoice () {
    return prompt ("Please enter your move (rock, paper or scissors)").toLowerCase;
 }
 
-const humanSelection = getHumanChoice()
-const computerSelection = getComputerChoice();
 
-function playRound(computerChoice, humanChoice) {
+function playRound(computerSelection, humanSelection) {
   if (humanSelection !== computerSelection){
     if (humanSelection ==="rock" && computerSelection==="paper") {
         computerScore += 1;
@@ -32,16 +30,31 @@ function playRound(computerChoice, humanChoice) {
         computerScore +=1
     }
 
-    if (humanSelection ==="paper" && computerSelection ==="rock"){
+    if (humanSelection ==="paper" && computerSelection ==="rock") {
         humanScore += 1
-    } else is (humanSelection==="paper" && computerSelection==="scissors"){
+    } else if (humanSelection==="paper" && computerSelection==="scissors"){
         computerScore +=1
     }
   }
-  roundsPlayed+=1;
-    
+  roundsPlayed+=1;   
 }
 
+function playGame() {
+    for (let i = 0; i<5; i++){
+        const computerSelection = getComputerChoice();
+        const humanSelection = getHumanChoice();
 
-console.log(`computer's move: ${computerSelection}`);
-console.log(`Your move: ${humanSelection}`)
+        playRound(computerSelection, humanSelection);
+
+        console.log(`computer's move: ${computerSelection}`);
+        console.log(`Your move: ${humanSelection}`)
+        console.log(`Your score is: ${humanScore}, computer's score is: ${computerScore}`)
+    }
+    if (humanScore > computerScore){
+        console.log("Congratulations! You've won!");
+    } else {
+        console.log("Regrettably, the computer has won. Yay computer! (-0-)");
+    }
+}
+
+playGame();
