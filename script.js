@@ -12,7 +12,7 @@ function getComputerChoice() {
 };
 
 function getHumanChoice () {
-   return prompt ("Please enter your move (rock, paper or scissors)").toLowerCase;
+   return prompt ("Please enter your move (rock, paper or scissors)").toLowerCase();
 }
 
 
@@ -52,8 +52,10 @@ function playGame() {
     }
     if (humanScore > computerScore){
         console.log("Congratulations! You've won!");
-    } else {
+    } else if (humanScore < computerScore) {
         console.log("Regrettably, the computer has won. Yay computer! (-0-)");
+    } else {
+        console.log ("It's a tie.");
     }
 }
 
