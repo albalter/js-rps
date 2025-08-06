@@ -36,7 +36,7 @@ function playRound(computerSelection, humanSelection) {
         computerScore +=1
     }
   } else {
-    console.log("This round was tied.")
+    console.log("This round was tied. Scores unchanged.")
   }
   roundsPlayed+=1;   
 }
