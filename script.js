@@ -35,6 +35,8 @@ function playRound(computerSelection, humanSelection) {
     } else if (humanSelection==="paper" && computerSelection==="scissors"){
         computerScore +=1
     }
+  } else {
+    console.log("This round was tied.")
   }
   roundsPlayed+=1;   
 }
