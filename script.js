@@ -1,6 +1,26 @@
 
 let humanScore = 0;
 let computerScore = 0;
+let humanSelection = '';
+
+const buttons = document.querySelectorAll("button")
+buttons.forEach((button) =>{
+    button.addEventListener("click", () => {
+        humanSelection=button.id;
+
+        const computerSelection = getComputerChoice();
+
+        playRound(computerSelection, humanSelection);
+        updateScores();
+        
+        console.log(`computer's move: ${computerSelection}`);
+        console.log(`Your move: ${humanSelection}`)
+        console.log(`Your score is: ${humanScore}, computer's score is: ${computerScore}`)
+    });
+
+
+});
+
 
 function getComputerChoice() {
     choice = Math.floor(Math.random()*3)+1;
@@ -12,7 +32,7 @@ function getComputerChoice() {
 };
 
 function getHumanChoice () {
-   return prompt ("Please enter your move (rock, paper or scissors)").toLowerCase();
+   return humanSelection;
 }
 
 function playRound(computerSelection, humanSelection) {
@@ -40,8 +60,9 @@ function playRound(computerSelection, humanSelection) {
 }
 
 function resetMatch() {
-   let humanScore = 0;
-   let computerScore = 0;
+   humanScore = 0;
+   computerScore = 0;
+   humanSelection ='';
    updateScoreBoardUI(humanScore, computerScore);
 }
 
@@ -55,25 +76,23 @@ function updateScoreBoardUI(humanScore, computerScore){
 function updateScores() {
     updateScoreBoardUI(humanScore, computerScore)
     if (humanScore == 5) {
-        alert("Congratulations! You've won the match! Re-setting the game...");
+        alert("Congratulations! \\(-o-)/ You've won the match! Re-setting the game...");
         resetMatch();
    } else if (computerScore == 5) {
-        alert ("Regrettably, the computer has won. Yay computer! (-0-). Re-setting the game.");
+        alert ("Regrettably, the computer has won. Yay computer! \\(-o-)/. Re-setting the game.");
         resetMatch();
    }
 }
 
 function playGame() {
     
-    const computerSelection = getComputerChoice();
-    const humanSelection = getHumanChoice();
-
+    /*
     playRound(computerSelection, humanSelection);
     updateScores();
     console.log(`computer's move: ${computerSelection}`);
     console.log(`Your move: ${humanSelection}`)
     console.log(`Your score is: ${humanScore}, computer's score is: ${computerScore}`)
-    
+    */
     /*
     if (humanScore > computerScore){
         console.log();
@@ -85,4 +104,4 @@ function playGame() {
     */
 }
 
-playGame();
+//playGame();
