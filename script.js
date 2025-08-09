@@ -1,6 +1,6 @@
+
 let humanScore = 0;
 let computerScore = 0;
-let roundsPlayed =0;
 
 function getComputerChoice() {
     choice = Math.floor(Math.random()*3)+1;
@@ -14,7 +14,6 @@ function getComputerChoice() {
 function getHumanChoice () {
    return prompt ("Please enter your move (rock, paper or scissors)").toLowerCase();
 }
-
 
 function playRound(computerSelection, humanSelection) {
   if (humanSelection !== computerSelection){
@@ -37,28 +36,53 @@ function playRound(computerSelection, humanSelection) {
     }
   } else {
     console.log("This round was tied. Scores unchanged.")
-  }
-  roundsPlayed+=1;   
+  } 
+}
+
+function resetMatch() {
+   let humanScore = 0;
+   let computerScore = 0;
+   updateScoreBoardUI(humanScore, computerScore);
+}
+
+function updateScoreBoardUI(humanScore, computerScore){
+   const displayPlayerScore = document.querySelector("#results #playerScore");
+   const displayComputerScore = document.querySelector("#results #computerScore");
+   displayPlayerScore.textContent = humanScore;
+   displayComputerScore.textContent = computerScore;
+}
+
+function updateScores() {
+    updateScoreBoardUI(humanScore, computerScore)
+    if (humanScore == 5) {
+        alert("Congratulations! You've won the match! Re-setting the game...");
+        resetMatch();
+   } else if (computerScore == 5) {
+        alert ("Regrettably, the computer has won. Yay computer! (-0-). Re-setting the game.");
+        resetMatch();
+   }
 }
 
 function playGame() {
-    for (let i = 0; i<5; i++){
-        const computerSelection = getComputerChoice();
-        const humanSelection = getHumanChoice();
+    
+    const computerSelection = getComputerChoice();
+    const humanSelection = getHumanChoice();
 
-        playRound(computerSelection, humanSelection);
-
-        console.log(`computer's move: ${computerSelection}`);
-        console.log(`Your move: ${humanSelection}`)
-        console.log(`Your score is: ${humanScore}, computer's score is: ${computerScore}`)
-    }
+    playRound(computerSelection, humanSelection);
+    updateScores();
+    console.log(`computer's move: ${computerSelection}`);
+    console.log(`Your move: ${humanSelection}`)
+    console.log(`Your score is: ${humanScore}, computer's score is: ${computerScore}`)
+    
+    /*
     if (humanScore > computerScore){
-        console.log("Congratulations! You've won!");
+        console.log();
     } else if (humanScore < computerScore) {
-        console.log("Regrettably, the computer has won. Yay computer! (-0-)");
+        console.log("");
     } else {
         console.log ("It's a tie.");
     }
+    */
 }
 
 playGame();
