@@ -2,6 +2,7 @@
 let humanScore = 0;
 let computerScore = 0;
 let humanSelection = '';
+const CHOICES = ["rock", "paper", "scissors"];
 
 const buttons = document.querySelectorAll("button")
 buttons.forEach((button) =>{
@@ -15,21 +16,15 @@ buttons.forEach((button) =>{
         
         console.log(`computer's move: ${computerSelection}`);
         console.log(`Your move: ${humanSelection}`)
-        console.log(`Your score is: ${humanScore}, computer's score is: ${computerScore}`)
+
     });
-
-
 });
 
 
 function getComputerChoice() {
-    choice = Math.floor(Math.random()*3)+1;
-    switch (choice){
-        case 1: return "rock";
-        case 2: return "paper";
-        case 3: return "scissors";
-    }
-};
+    const randomIndex = Math.floor(Math.random() * CHOICES.length);
+    return CHOICES[randomIndex];
+}
 
 function getHumanChoice () {
    return humanSelection;
@@ -67,19 +62,23 @@ function resetMatch() {
 }
 
 function updateScoreBoardUI(humanScore, computerScore){
-   const displayPlayerScore = document.querySelector("#results #playerScore");
-   const displayComputerScore = document.querySelector("#results #computerScore");
+   const displayPlayerScore = document.getElementById("playerScore");
+   const displayComputerScore = document.getElementById("computerScore");
+   const messageBoard = document.getElementById("message")
    displayPlayerScore.textContent = humanScore;
    displayComputerScore.textContent = computerScore;
+
+   messageBoard.textContent = `Your score is: ${humanScore}, computer's score is: ${computerScore}`
+   
 }
 
 function updateScores() {
     updateScoreBoardUI(humanScore, computerScore)
     if (humanScore == 5) {
-        alert("Congratulations! \\(-o-)/ You've won the match! Re-setting the game...");
+        alert(`Congratulations! \\(-o-)/ You've won the match! Your final score is: ${humanScore} vs the computer:${computerScore}. Re-setting the game...`);
         resetMatch();
    } else if (computerScore == 5) {
-        alert ("Regrettably, the computer has won. Yay computer! \\(-o-)/. Re-setting the game.");
+        alert (`Regrettably, the computer has won. Yay computer! \\(-o-)/. Your final score is: ${humanScore} vs the computer:${computerScore}. Re-setting the game.`);
         resetMatch();
    }
 }
